@@ -1,13 +1,20 @@
-FROM node:18-slim
+# Menggunakan image dasar Node.js versi 18 dengan varian "slim" (versi ringan)
+FROM node:18-slim  
 
-WORKDIR /usr/src/app
+# Menetapkan direktori kerja di dalam container ke "/usr/src/app"
+WORKDIR /usr/src/app  
 
-COPY package.json yarn.lock ./
+# Menyalin file package.json dan yarn.lock ke dalam container
+COPY package.json yarn.lock ./  
 
-RUN yarn install --production
+# Menginstal dependencies dalam mode produksi (tanpa devDependencies)
+RUN yarn install --production  
 
-COPY . .
+# Menyalin seluruh isi proyek ke dalam container
+COPY . .  
 
-EXPOSE 5000
+# Membuka port 5000 untuk menerima request dari luar container
+EXPOSE 5000  
 
+# Menjalankan aplikasi dengan menjalankan "index.js" menggunakan Node.js
 CMD [ "node", "index.js" ]
